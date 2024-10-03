@@ -1,12 +1,6 @@
 Subiendo un archivo de texto desde la computadora de Adrián hacia el repositorio del proyecto
 
-<<<<<<< HEAD
-Actualizando un archivo de texto desde la computadora de Jonathan hacia el repositorio del proyecto
-
-Actualizando un archivo de texto desde la computadora de Luis Manuel hacia el repositorio del proyecto
-=======
 Subiendo un archivo de texto desde la computadora de Jonathan hacia el repositorio del proyecto
 
 
 Actualizando un archivo de texto desde la computadora de Erick hacia el repositorio del proyecto
->>>>>>> caaaa1fcb0677c9bbfc92cb8dd48296455989416
