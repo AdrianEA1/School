@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('assistances', function (Blueprint $table) {
+        Schema::create('attendances', function (Blueprint $table) {
             $table->id();
 
 
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('student_id')->references('id')->on('students');
 
             $table->date('fecha');
-            $table->time('hora');   
+            $table->time('hora');
 
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('assistances');
+        Schema::dropIfExists('attendances');
     }
 };
