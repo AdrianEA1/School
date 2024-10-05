@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->char('grado', length: 1);
-            $table->char('grupo', 1)->unique();
+            $table->char('grupo', 1);
 
             $table->unsignedBigInteger('id_school');
             $table->foreign('id_school')->references('id')->on('schools');
