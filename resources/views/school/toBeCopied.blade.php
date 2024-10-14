@@ -1,4 +1,4 @@
-@extends('layouts.e-commerce')
+@extends('layouts.school')
 
 @section('content')
     <!--Content-->
