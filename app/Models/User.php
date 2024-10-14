@@ -17,10 +17,17 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        #TUVE QUE MODIFICAR ESTO por que en nuestra BD, tabla users, esta declarado como CLave
+        'email', 'clave',
+        /*'name',
         'email',
-        'password',
+        'password',*/
     ];
+
+    public function getAuthPassword()
+    {
+        return $this->clave;
+    }
 
     /**
      * The attributes that should be hidden for serialization.
