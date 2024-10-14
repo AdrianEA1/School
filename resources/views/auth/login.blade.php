@@ -1,30 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+@extends('layouts.school')
 
-    <div>
-        <img src="{{asset('images/beePresent.png')}}" alt="beePresent.png" style="max-width: 5%">
-        <label>Escuela Secundaria Ejemplo #1</label>
+@section('content')
+    <nav id="" class="navbar-principal">
+        <div class="navbar-container">
+            <div class="container-logo">
+                <div class="logo">
+                    <img src="{{asset('assets/img/beePresent.png')}}" alt="">
+                </div>
+            </div>
+            <div class="titleSchool">
+                Escuela Secundaria Monte de las Ideas
+            </div>
+        </div>
+
+    </nav>
+    <div class="form-login">
+    <div class="form-container">
+        <form action="{{ route('auth.login') }}" method="POST">
+            @csrf
+            <p for="" class="form-title">Iniciar sesión</p>
+            <p for="" class="form-subtitle">Inicia sesión con tu correo electrónico</p>
+            <div id="msgCatch" class="msgCatch">
+                @if ($errors->any())
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            {{ $error }}
+                        @endforeach
+                    </ul>
+                @endif
+
+            </div>
+            <div class="form-group">
+              <label for="email">Correo</label>
+              <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}" aria-describedby="emailHelp" placeholder="Correo" required>
+              <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu correo electrónico con nadie.</small>
+            </div>
+            <div class="form-group">
+              <label for="password">Contraseña</label>
+              <input type="password" class="form-control" id="password" name="password" value="{{old('password')}}" placeholder="Contraseña" required>
+            </div>
+            <button type="submit" class="btn btn-custom" >Iniciar sesión</button>
+          </form>
     </div>
-    <h1>Iniciar Sesión</h1>
-    <h1>Inicia sesión con tu correo electronico</h1>
-    <form action="{{ route('auth.login') }}" method="POST">
-        @csrf
-        <label>Correo</label>
-        <input type="text" name="email" required>
-        <br>
-        <label>Contraseña</label>
-        <input type="password" name="password" required>
-        <br>
-        <input type="submit" value="Iniciar sesión" >
-    </form>
 
-
-</body>
-</html>
+    </div>
+@endsection
