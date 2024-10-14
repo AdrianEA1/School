@@ -11,5 +11,10 @@ Route::get('/login', [AuthController::class, 'loginForm'])->name('auth.loginForm
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 
 Route::get('/welcome', function () {
-    return view('welcome');
+    return view('school.login');
+});
+
+//Interfaz del prefecto
+Route::get('/prefect_interface', function () {
+    return view('school.prefect_interface');
 });
