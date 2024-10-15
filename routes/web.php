@@ -22,3 +22,8 @@ Route::get('/welcome', function () {
 Route::get('/prefect_interface', function () {
     return view('school.prefect_interface');
 });
+
+//Interfaz del prefecto
+Route::get('/group_details', function () {
+    return view('school.groups_interface');
+});
