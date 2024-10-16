@@ -2,6 +2,10 @@
 
 @section('content')
 
+    <script>
+        document.querySelector('body').style.overflow = 'auto';
+    </script>
+
     <div class="d-flex align-items-center justify-content-center">
         <div class="col-md-12">
             <div class="card">
@@ -17,7 +21,7 @@
                             data-bs-target="#addRowModal"
                         >
 
-                            [Aquí va el nombre del prefecto]
+                            {{ $user->nombre . ' ' . $user->apellido_paterno . ' ' . $user->apellido_paterno }}
                         </h5>
                     </div>
                 </div>
@@ -137,96 +141,28 @@
 
                             <tbody>
 
-                            <tr>
-                                <td>[Aquí va el id del grupo]</td>
-                                <td>[Aquí va el grado del grupo]</td>
-                                <td>[Aquí va el carácter alfabético del grupo]</td>
-                                <td>
-                                    <div class="form-button-action">
-                                        <button
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            title=""
-                                            class="btn btn-link btn-primary btn-lg"
-                                            data-original-title="Edit Task"
-                                        >
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>[Aquí va el id del grupo]</td>
-                                <td>[Aquí va el grado del grupo]</td>
-                                <td>[Aquí va el carácter alfabético del grupo]</td>
-                                <td>
-                                    <div class="form-button-action">
-                                        <button
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            title=""
-                                            class="btn btn-link btn-primary btn-lg"
-                                            data-original-title="Edit Task"
-                                        >
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>[Aquí va el id del grupo]</td>
-                                <td>[Aquí va el grado del grupo]</td>
-                                <td>[Aquí va el carácter alfabético del grupo]</td>
-                                <td>
-                                    <div class="form-button-action">
-                                        <button
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            title=""
-                                            class="btn btn-link btn-primary btn-lg"
-                                            data-original-title="Edit Task"
-                                        >
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>[Aquí va el id del grupo]</td>
-                                <td>[Aquí va el grado del grupo]</td>
-                                <td>[Aquí va el carácter alfabético del grupo]</td>
-                                <td>
-                                    <div class="form-button-action">
-                                        <button
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            title=""
-                                            class="btn btn-link btn-primary btn-lg"
-                                            data-original-title="Edit Task"
-                                        >
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>[Aquí va el id del grupo]</td>
-                                <td>[Aquí va el grado del grupo]</td>
-                                <td>[Aquí va el carácter alfabético del grupo]</td>
-                                <td>
-                                    <div class="form-button-action">
-                                        <button
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            title=""
-                                            class="btn btn-link btn-primary btn-lg"
-                                            data-original-title="Edit Task"
-                                        >
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                            @foreach($groups as $group)
+
+                                <tr>
+                                    <td>{{ $group->id }}</td>
+                                    <td>{{ $group->grado }}</td>
+                                    <td>{{ $group->grupo }}</td>
+                                    <td>
+                                        <div class="form-button-action">
+                                            <a
+                                                href="{{ route('group_details') }}"
+                                                data-bs-toggle="tooltip"
+                                                class="btn btn-link btn-primary btn-lg"
+                                                data-original-title="Edit Task"
+                                            >
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </div>
+
+                                    </td>
+                                </tr>
+
+                            @endforeach
 
                             </tbody>
                         </table>

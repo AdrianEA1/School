@@ -27,7 +27,11 @@ class AuthController extends Controller
         // Verificar si el usuario existe y la contraseña coincide
         if ($user && $user->clave === $request->password) {
             // Si es exitoso, redirigir a la página deseada
-            return redirect()->intended('welcome');
+
+            if ($user->role_id == 3)
+                return redirect()->intended(route('prefect_interface', $user->id ));//role_id = 3 -> prefect
+            else
+                return redirect()->intended('welcome');
         }
 
         // Si la autenticación falla, redirigir de vuelta con un mensaje de error
