@@ -17,7 +17,13 @@ Route::get('/welcome', function () {
 //Interfaz del prefecto #n
 Route::get('/prefect_interface/{user_id}', [PrefectController::class, 'index'])->name('prefect_interface');
 
-//Interfaz del prefecto
+//Interfaz detalle prefecto
 Route::get('/group_details', function () {
     return view('school.groups_interface');
 })->name('group_details');
+
+
+//Interfaz del tutor
+Route::get('/tutor_interface', function () {
+    return view('school.tutor_interface');
+})->name('tutor_interface');
