@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\PrefectController;
+use App\Http\Controllers\TutorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SiteController::class, 'index'])->name('home');
@@ -15,17 +17,14 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-/*
-Route::get('/welcome', function () {
-    return view('school.login');
-});*/
+//Interfaz del prefecto #n
+Route::get('/prefect_interface/{user_id}', [PrefectController::class, 'index'])->name('prefect_interface');
 
-//Interfaz del prefecto
-Route::get('/prefect_interface', function () {
-    return view('school.prefect_interface');
-});
-
-//Interfaz del prefecto
+//Interfaz detalle prefecto
 Route::get('/group_details', function () {
     return view('school.groups_interface');
-});
+})->name('group_details');
+
+
+//Interfaz del tutor
+Route::get('/tutor_interface/{user_id}', [TutorController::class, 'index'])->name('tutor_interface');
