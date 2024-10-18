@@ -77,34 +77,43 @@ const cerrarCamara = () => {
 qrcode.callback = (respuesta) => {
     // cerrarCamara();
   if (respuesta) {
-    Swal.fire({
-        title: "¡Su asistencia se ha registrado!",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1300
-      }).then(() => scan());
+
+    qrss(respuesta)
     // activarSonido();
     //encenderCamara();
     // cerrarCamara();
-    // qrss(respuesta);
   }
 };
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 
 function qrss(respuesta){
-  console.log(respuesta)
-  let accion = "insert"
   $.ajax({
-    url: "class/classQR.php",
-    type: "post",
-    data: {accion: accion, respuesta: respuesta},
-    success: function(html){
-        areaTrabajo.innerHTML=html;
-        Swal.fire("Logrado, se envio la info")
-        // $("#title").html(respuesta)
+    url: 'take',
+    type: 'post',
+    data: {student_id: respuesta},
+    dataType: 'json',
+    success: function(){
+        Swal.fire({
+            title: "¡Su asistencia se ha registrado!",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1300
+        }).then(() => scan());
     },
     error: function(e){
-        console.log("error");
+        console.log(e);
+        Swal.fire({
+            title: "¡Ha ocurrido un error inesperado!",
+            icon: "error",
+            showConfirmButton: false,
+            timer: 1300
+        }).then(() => scan());
     }
 });
 

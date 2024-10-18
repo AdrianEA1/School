@@ -4,11 +4,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\PrefectController;
 use App\Http\Controllers\TutorController;
+use App\Http\Controllers\QRController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SiteController::class, 'index'])->name('home');
 
-Route::get('/asistencia', [SiteController::class, 'interface_qr']);
+
 
 
 Route::get('/login', [AuthController::class, 'loginForm'])->name('auth.loginForm');
@@ -28,3 +29,7 @@ Route::get('/group_details', function () {
 
 //Interfaz del tutor
 Route::get('/tutor_interface/{user_id}', [TutorController::class, 'index'])->name('tutor_interface');
+
+//Tomar asistencia
+Route::get('/asistencia', [SiteController::class, 'interface_qr']);
+Route::post('/take', [QRController::class, 'store']);

@@ -5,11 +5,13 @@
 
     <title>Datatables - Kaiadmin Bootstrap 5 Admin Dashboard</title>
     <meta  content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link  rel="icon"  href="{{ asset('assets/img/kaiadmin/favicon.ico') }}" type="image/x-icon"/>
     <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     <!-- Fonts and icons -->
     <script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
