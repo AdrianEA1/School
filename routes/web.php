@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\PrefectController;
+use App\Http\Controllers\TutorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SiteController::class, 'index'])->name('home');
@@ -24,6 +25,4 @@ Route::get('/group_details', function () {
 
 
 //Interfaz del tutor
-Route::get('/tutor_interface', function () {
-    return view('school.tutor_interface');
-})->name('tutor_interface');
+Route::get('/tutor_interface/{user_id}', [TutorController::class, 'index'])->name('tutor_interface');

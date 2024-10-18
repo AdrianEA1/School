@@ -16,7 +16,7 @@
                         &nbsp;
                         <h4 class="card-title">Escuela Secundaria Monte de las Ideas</h4>
                         <h5 class="ms-auto" data-bs-toggle="modal" data-bs-target="#addRowModal">
-                            [Aquí va el nombre del tutor]
+                            {{ $user->nombre . ' ' . $user->apellido_paterno . ' ' . $user->apellido_paterno }}
                         </h5>
                     </div>
                 </div>
@@ -42,76 +42,27 @@
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td style="text-align: center;">
-                                        <div class="form-button-action">
-                                            <a href="#" data-bs-toggle="tooltip"
-                                                class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                        </div>
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td style="text-align: center;">
-                                        <div class="form-button-action">
-                                            <a href="#" data-bs-toggle="tooltip"
-                                                class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                        </div>
+                                @foreach($students as $student)
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td style="text-align: center;">
-                                        <div class="form-button-action">
-                                            <a href="#" data-bs-toggle="tooltip"
-                                                class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                        </div>
+                                    <tr>
+                                        <td>{{ $student->id }}</td>
+                                        <td>{{ $student->nombre }} {{ $student->apellido_paterno }} {{ $student->apellido_materno }}</td>
+                                        <td>{{ $student->group->grado }}{{ $student->group->grupo }}</td>
+                                        <td style="text-align: center;">
+                                            <div class="form-button-action">
+                                                <a href="#"
+                                                   data-bs-toggle="tooltip"
+                                                   class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            </div>
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td style="text-align: center;">
-                                        <div class="form-button-action" >
-                                            <a href="#" data-bs-toggle="tooltip"
-                                                class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                        </div>
+                                        </td>
+                                    </tr>
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td style="text-align: center;">
-                                        <div class="form-button-action">
-                                            <a href="#" data-bs-toggle="tooltip"
-                                                class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                        </div>
+                                @endforeach
 
-                                    </td>
-                                </tr>
 
                             </tbody>
                         </table>

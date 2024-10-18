@@ -29,7 +29,9 @@ class AuthController extends Controller
             // Si es exitoso, redirigir a la página deseada
 
             if ($user->role_id == 3)
-                return redirect()->intended(route('prefect_interface', $user->id ));//role_id = 3 -> prefect
+                return redirect()->intended(route('prefect_interface', $user->id ));//role_id = s -> prefect
+            else if ($user->role_id == 2)
+                return redirect()->intended(route('tutor_interface', $user->id ));//role_id = 2 -> tutor
             else
                 return redirect()->intended('welcome');
         }

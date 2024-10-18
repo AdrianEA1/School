@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Group;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class PrefectController extends Controller
+class TutorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index($user_id)
     {
-        $groups = Group::where('user_id', $user_id)->get();
+        $students = Student::where('user_id', $user_id)->get();
         $user = User::find($user_id);
 
-        return view('school.prefect_interface', compact('groups', 'user'));
+        return view('school.tutor_interface', compact('students', 'user'));
     }
+
 
     /**
      * Show the form for creating a new resource.
