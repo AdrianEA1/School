@@ -10,4 +10,8 @@ class SiteController extends Controller
     {
         return view('index');
     }
+
+    public function interface_qr(){
+        return view('school.qr');
+    }
 }

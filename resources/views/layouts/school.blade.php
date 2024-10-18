@@ -9,6 +9,8 @@
     <link  rel="icon"  href="{{ asset('assets/img/kaiadmin/favicon.ico') }}" type="image/x-icon"/>
     <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Fonts and icons -->
     <script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
     <script>
@@ -39,6 +41,9 @@
 </head>
 <body>
         @yield('content')
+
+        <script src="{{asset('assets/js/qrCode.min.js')}}"></script>
+        <script src="{{asset('assets/js/qr.js')}}"></script>
 </body>
 
 </html>
