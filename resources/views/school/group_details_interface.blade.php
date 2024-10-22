@@ -57,7 +57,7 @@
 
                                     <tr>
                                         <td>{{ $student->nombre }} {{ $student->apellido_paterno }} {{ $student->apellido_materno }}</td>
-                                        <td>2[Aquí van las asistencias del alumno]</td>
+                                        <td>{{ count($student->attendances) }}</td>
                                         <td style="text-align: center; ">
                                             <button type="button" class="btn btn-icon btn-link "><i class="fa fa-link"></i></button>
                                         </td>

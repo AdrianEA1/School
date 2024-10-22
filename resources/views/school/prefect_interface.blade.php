@@ -150,7 +150,7 @@
                                     <td>
                                         <div class="form-button-action">
                                             <a
-                                                href="{{ route('group_details') }}"
+                                                href="{{ route('group_details_interface', $group->id) }}"
                                                 data-bs-toggle="tooltip"
                                                 class="btn btn-link btn-primary btn-lg"
                                                 data-original-title="Edit Task"

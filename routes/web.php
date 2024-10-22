@@ -4,13 +4,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\PrefectController;
 use App\Http\Controllers\TutorController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\QRController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SiteController::class, 'index'])->name('home');
-
-
-
 
 Route::get('/login', [AuthController::class, 'loginForm'])->name('auth.loginForm');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
@@ -22,9 +20,7 @@ Route::get('/welcome', function () {
 Route::get('/prefect_interface/{user_id}', [PrefectController::class, 'index'])->name('prefect_interface');
 
 //Interfaz detalle prefecto
-Route::get('/group_details', function () {
-    return view('school.groups_interface');
-})->name('group_details');
+Route::get('/group_details_interface/{group_id}', [GroupController::class, 'index'])->name('group_details_interface');
 
 
 //Interfaz del tutor
