@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,6 +19,14 @@ class TutorController extends Controller
 
         return view('school.tutor_interface', compact('students', 'user'));
     }
+
+    public function getAttendances($student_id)
+    {
+        $attendances = Attendance::where('student_id', $student_id)->get();
+        return response()->json($attendances);
+    }
+
+
 
 
     /**
