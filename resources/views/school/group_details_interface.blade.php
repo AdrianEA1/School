@@ -59,10 +59,14 @@
                                         <td>{{ $student->nombre }} {{ $student->apellido_paterno }} {{ $student->apellido_materno }}</td>
                                         <td>{{ count($student->attendances) }}</td>
                                         <td style="text-align: center; ">
-                                            <button type="button" class="btn btn-icon btn-link "><i class="fa fa-link"></i></button>
+                                            <a
+                                                href="{{ route('reports_interface', $student->id) }}"
+                                                type="button" class="btn btn-icon btn-link "><i class="fa fa-link"></i></a>
                                         </td>
                                         <td style="text-align: center; ">
-                                            <button type="button" class="btn btn-icon btn-round btn-warning"><i class="fa fa-exclamation-circle"></i></button>
+                                            <a
+                                                href="{{ route('reports_interface', $student->id) }}"
+                                                type="button" class="btn btn-icon btn-round btn-warning"><i class="fa fa-exclamation-circle"></i></a>
                                         </td>
                                     </tr>
 

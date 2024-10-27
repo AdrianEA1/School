@@ -6,6 +6,7 @@ use App\Http\Controllers\PrefectController;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\QRController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SiteController::class, 'index'])->name('home');
@@ -33,7 +34,7 @@ Route::get('/asistencia', [SiteController::class, 'interface_qr']);
 Route::post('/take', [QRController::class, 'store']);
 
 //Interfaz CRUD reportes
-Route::get('/reports_interface', function () {
+/*Route::get('/reports_interface', function () {
     return view('school.reports_interface');
-});
-//Route::get('/reports_interface', [ReportController::class, 'index'])->name('reports_interface');
+});*/
+Route::get('/reports_interface/{student_id}', [ReportController::class, 'index'])->name('reports_interface');

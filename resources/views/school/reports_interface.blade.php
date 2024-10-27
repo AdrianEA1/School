@@ -16,7 +16,7 @@
                         &nbsp;
                         <h4 class="card-title">Escuela Secundaria Monte de las Ideas</h4>
                         <h5 class="ms-auto" data-bs-toggle="modal" data-bs-target="#addRowModal">
-                            [Nombre del usuario]
+                            {{ $student->group->user->nombre }} {{ $student->group->user->apellido_paterno }} {{ $student->group->user->apellido_materno }}
                         </h5>
                     </div>
                 </div>
@@ -57,166 +57,42 @@
 
                             <tbody>
 
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td style="text-align: center;">
+                            @foreach($reports as $report)
 
-                                    <div class="form-button-action">
-                                        <button
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            title=""
-                                            class="btn btn-link btn-primary btn-lg"
-                                            data-original-title="Edit Task"
-                                        >
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            title=""
-                                            class="btn btn-link btn-danger"
-                                            data-original-title="Remove"
-                                        >
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </div>
+                                <tr>
+                                    <td>{{ $report->id }}</td>
+                                    <td>{{ $report->fecha }}</td>
+                                    <td>{{ $report->motivo }}</td>
+                                    <td>{{ $report->maestro }}</td>
+                                    <td>{{ $report->tipo }}</td>
+                                    <td style="text-align: center;">
 
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td style="text-align: center;">
-
-                                    <div class="form-button-action">
-                                        <button
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            title=""
-                                            class="btn btn-link btn-primary btn-lg"
-                                            data-original-title="Edit Task"
-                                        >
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            title=""
-                                            class="btn btn-link btn-danger"
-                                            data-original-title="Remove"
-                                        >
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </div>
+                                        <div class="form-button-action">
+                                            <button
+                                                type="button"
+                                                data-bs-toggle="tooltip"
+                                                title=""
+                                                class="btn btn-link btn-primary btn-lg"
+                                                data-original-title="Edit Task"
+                                            >
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+                                            <button
+                                                type="button"
+                                                data-bs-toggle="tooltip"
+                                                title=""
+                                                class="btn btn-link btn-danger"
+                                                data-original-title="Remove"
+                                            >
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
 
 
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td style="text-align: center;">
+                                    </td>
+                                </tr>
 
-                                    <div class="form-button-action">
-                                        <button
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            title=""
-                                            class="btn btn-link btn-primary btn-lg"
-                                            data-original-title="Edit Task"
-                                        >
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            title=""
-                                            class="btn btn-link btn-danger"
-                                            data-original-title="Remove"
-                                        >
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </div>
-
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td style="text-align: center;">
-
-                                    <div class="form-button-action">
-                                        <button
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            title=""
-                                            class="btn btn-link btn-primary btn-lg"
-                                            data-original-title="Edit Task"
-                                        >
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            title=""
-                                            class="btn btn-link btn-danger"
-                                            data-original-title="Remove"
-                                        >
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </div>
-
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td style="text-align: center;">
-
-                                    <div class="form-button-action">
-                                        <button
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            title=""
-                                            class="btn btn-link btn-primary btn-lg"
-                                            data-original-title="Edit Task"
-                                        >
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            title=""
-                                            class="btn btn-link btn-danger"
-                                            data-original-title="Remove"
-                                        >
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </div>
-
-
-                                </td>
-                            </tr>
+                            @endforeach
 
 
 
