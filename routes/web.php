@@ -31,3 +31,9 @@ Route::get('/get-attendances/{student_id}', [TutorController::class, 'getAttenda
 //Tomar asistencia
 Route::get('/asistencia', [SiteController::class, 'interface_qr']);
 Route::post('/take', [QRController::class, 'store']);
+
+//Interfaz CRUD reportes
+Route::get('/reports_interface', function () {
+    return view('school.reports_interface');
+});
+//Route::get('/reports_interface', [ReportController::class, 'index'])->name('reports_interface');
