@@ -3,140 +3,189 @@
 @section('content')
     <script>
         document.querySelector('body').style.overflow = 'auto';
+        var studentId = "{{ $student->id }}";
     </script>
-<div class="wrapper" style="overflow: visible">
+    <div class="wrapper" style="overflow: visible">
 
-    <div class="d-flex align-items-center justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
 
-                <div class="card-header">
-                    <div class="d-flex align-items-center">
-                        <img height="60px" src="{{ asset('assets/img/beePresent.png') }}">
-                        &nbsp;
-                        <h4 class="card-title">Escuela Secundaria Monte de las Ideas</h4>
-                        <h5 class="ms-auto" data-bs-toggle="modal" data-bs-target="#addRowModal">
-                            {{ $student->group->user->nombre }} {{ $student->group->user->apellido_paterno }} {{ $student->group->user->apellido_materno }}
-                        </h5>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="d-flex align-items-center justify-content-center">
-        <div class="col-md-10">
-            <div class="card">
-
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="tblTutor" class="display table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th style="width: 10%; text-align: center;">ID</th>
-                                    <th style="width: 20%; text-align: center;">FECHA</th>
-                                    <th style="width: 35%; text-align: center;">MOTIVO</th>
-                                    <th style="width: 20%; text-align: center;">MAESTRO</th>
-                                    <th style="width: 25%; text-align: center;">TIPO</th>
-                                    <th style="width: 10%; text-align: center;">
-                                        <div class="form-button-action">
-                                            <button
-                                                type="button"
-                                                data-bs-toggle="tooltip"
-                                                title=""
-                                                class="btn btn-link btn-success btn-lg"
-                                                data-original-title="Add Task"
-                                            >
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-
-                            @foreach($reports as $report)
-
-                                <tr>
-                                    <td>{{ $report->id }}</td>
-                                    <td>{{ $report->fecha }}</td>
-                                    <td>{{ $report->motivo }}</td>
-                                    <td>{{ $report->maestro }}</td>
-                                    <td>{{ $report->tipo }}</td>
-                                    <td style="text-align: center;">
-
-                                        <div class="form-button-action">
-                                            <button
-                                                type="button"
-                                                data-bs-toggle="tooltip"
-                                                title=""
-                                                class="btn btn-link btn-primary btn-lg"
-                                                data-original-title="Edit Task"
-                                            >
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button
-                                                type="button"
-                                                data-bs-toggle="tooltip"
-                                                title=""
-                                                class="btn btn-link btn-danger"
-                                                data-original-title="Remove"
-                                            >
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </div>
-
-
-                                    </td>
-                                </tr>
-
-                            @endforeach
-
-
-
-                            </tbody>
-                        </table>
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <img height="60px" src="{{ asset('assets/img/beePresent.png') }}">
+                            &nbsp;
+                            <h4 class="card-title">Escuela Secundaria Monte de las Ideas</h4>
+                            <h5 class="ms-auto" data-bs-toggle="modal" data-bs-target="#addRowModal">
+                                {{ $student->group->user->nombre }} {{ $student->group->user->apellido_paterno }}
+                                {{ $student->group->user->apellido_materno }}
+                            </h5>
+                        </div>
                     </div>
 
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="tblReportes" class="display table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10%; text-align: center;">ID</th>
+                                        <th style="width: 20%; text-align: center;">FECHA</th>
+                                        <th style="width: 35%; text-align: center;">MOTIVO</th>
+                                        <th style="width: 20%; text-align: center;">MAESTRO</th>
+                                        <th style="width: 25%; text-align: center;">TIPO</th>
+                                        <th style="width: 10%; text-align: center;">
+                                            <div class="form-button-action">
+                                                <a href="#" id="openFormModal" data-bs-toggle="modal" data-bs-target="#formModal" class="btn btn-link btn-success btn-lg">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </div>
+
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal del Formulario -->
+        <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="calendarModalLabel">Editar Reporte</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Formulario donde se editarán los datos -->
+                        <form id="editReportForm">
+                            <div class="mb-3">
+                                <label for="editId" class="form-label">ID</label>
+                                <input type="text" class="form-control" id="Id" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editFecha" class="form-label">Fecha</label>
+                                <input type="date" class="form-control" id="Fecha" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editMotivo" class="form-label">Motivo</label>
+                                <input type="text" class="form-control" id="Motivo">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editMaestro" class="form-label">Maestro</label>
+                                <input type="text" class="form-control" id="Maestro">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editTipo" class="form-label">Tipo</label>
+                                <select class="form-control" id="Tipo" required>
+                                    <option value="" disabled selected>Selecciona el tipo de conducta</option>
+                                    <option value="Conducta Positiva">Conducta Positiva</option>
+                                    <option value="Conducta Negativa">Conducta Negativa</option>
+                                </select>
+                            </div>
+                            <input type="hidden" id="confirmacion" value="0">
+                            <input type="hidden" id="alumno" value="{{ $student->id }}">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- Botón para cerrar el modal sin guardar -->
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                        <!-- Botón para guardar los cambios -->
+                        <button type="button" class="btn btn-secondary" id="saveChangesButton">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Confirmación -->
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog"
+            aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que deseas eliminar este reporte?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" id="confirmDeleteButton">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Éxito -->
+        <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="successModalLabel">Éxito</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Operación realizada con éxito.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"ass="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Error -->
+        <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Hubo un error al procesar la solicitud.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
-</div>
-<!--   Core JS Files-->
-<script src="{{ asset('assets/js/core/jquery-3.7.1.min.js')}}"></script>
 
 
-<!-- FullCalendar Initialization -->
-
-    <!-- FullCalendar JS -->
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+        <!--   Core JS Files-->
+        <script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
 
 
+        <!-- Datatables-->
+        <script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
 
+        <!-- Formulario-->
+        <script src="{{ asset('assets/js/reports/reports.js') }}"></script>
+    @endsection
 
-
-<!-- Datatables-->
-<script src="{{ asset('assets/js/plugin/datatables/datatables.min.js')}}"></script>
-
-<script>
-$(document).ready(function () {
-    $("#tblTutor").DataTable({
-        paging: false,       // Desactiva la paginación
-        searching: false,    // Desactiva el campo de búsqueda
-        ordering: false,     // Desactiva la capacidad de ordenar
-        info: false,         // Desactiva el texto informativo ("Mostrando X a Y de Z entradas")
-        lengthChange: false, // Desactiva la opción de cambiar cuántas filas se muestran
-        language: {
-            emptyTable: "No hay datos disponibles" // Puedes personalizar el mensaje de tabla vacía
-        }
-    });
-});
-</script>
-
-@endsection
