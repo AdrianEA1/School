@@ -35,7 +35,8 @@ Route::post('/take', [QRController::class, 'store']);
 /*Route::get('/reports_interface', function () {
     return view('school.reports_interface');
 });*/
-Route::get('/reports_interface/{student_id}', action: [ReportController::class, 'index'])->name('reports_interface');
+Route::get('/reports_interface/{student_id}/{nuevo?}', action: [ReportController::class, 'index'])->name('reports_interface');
+
 Route::get('/report/list/{student_id}', [ReportController::class, 'list'])->name('report.list');
 
 //Update Reporte

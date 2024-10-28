@@ -4,6 +4,7 @@
     <script>
         document.querySelector('body').style.overflow = 'auto';
         var studentId = "{{ $student->id }}";
+        var nuevo = "{{ $nuevo }}";
     </script>
     <div class="wrapper" style="overflow: visible">
 
@@ -31,6 +32,9 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-body">
+                        <h3>Alumno: {{ $student->nombre }} {{ $student->apellido_paterno }}
+                            {{ $student->apellido_materno }}</h3>
+                        <hr>
                         <div class="table-responsive">
                             <table id="tblReportes" class="display table table-striped table-hover">
                                 <thead>

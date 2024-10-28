@@ -49,6 +49,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
             ],
         });
+        if (nuevo == 1){
+            $("#formModal").modal("show");
+        }
     });
 
     // Configurar el token CSRF para las solicitudes AJAX

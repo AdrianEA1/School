@@ -60,7 +60,7 @@
                                                     class="btn btn-icon btn-link "><i class="fa fa-link"></i></a>
                                             </td>
                                             <td style="text-align: center; ">
-                                                <a href="{{ route('reports_interface', $student->id) }}" type="button"
+                                                <a href="{{ route('reports_interface', [$student->id, $nuevo=1]) }}" type="button"
                                                     class="btn btn-icon btn-round btn-warning"><i
                                                         class="fa fa-exclamation-circle"></i></a>
                                             </td>

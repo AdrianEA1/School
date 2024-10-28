@@ -12,11 +12,15 @@ class ReportController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($student_id)
+    public function index($student_id, $nuevo = null)
     {
+        if (!isset($nuevo)) {
+            $nuevo=0;
+        }
+
         $reports = Report::where('student_id', $student_id)->get();
         $student = Student::find($student_id);
-        return view('school.reports_interface', compact('reports', 'student'));
+        return view('school.reports_interface', compact('reports', 'student', 'nuevo'));
     }
 
     public function list($student_id)
