@@ -74,6 +74,9 @@ document.addEventListener("DOMContentLoaded", function () {
         $("#Maestro").val(maestro);
         $("#Tipo").val(tipo);
     });
+    $(document).on("click", ".new-button", function () {
+        clearForm();
+    });
 
     // Guardar cambios al hacer clic en el botón de guardar del modal
     $("#saveChangesButton").on("click", function () {
@@ -103,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             success: function (response) {
                 $("#formModal").modal("hide");
-                $("#successModal").modal("show"); 
+                $("#successModal").modal("show");
                 table.ajax.reload(null, false);
             },
             error: function (error) {
@@ -151,12 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
         $("#Motivo").val('');
         $("#Maestro").val('');
         $("#Tipo").val('');
-        $("#confirmacion").val('');
-        $("#alumno").val('');
     }
-    $("#formModal").on("show.bs.modal", function () {
-        clearForm(); // Llama a clearForm cuando el modal se está mostrando
-    });
 
     $(window).on("resize", function () {
         table.responsive.recalc(); // Recalcular la responsividad de la tabla

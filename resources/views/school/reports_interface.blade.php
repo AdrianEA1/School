@@ -42,7 +42,8 @@
                                         <th style="width: 25%; text-align: center;">TIPO</th>
                                         <th style="width: 10%; text-align: center;">
                                             <div class="form-button-action">
-                                                <a href="#" id="openFormModal" data-bs-toggle="modal" data-bs-target="#formModal" class="btn btn-link btn-success btn-lg">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#formModal"
+                                                    class="btn btn-link btn-success btn-lg new-button" >
                                                     <i class="fa fa-plus"></i>
                                                 </a>
                                             </div>
@@ -66,7 +67,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="calendarModalLabel">Editar Reporte</h5>
+                        <h5 class="modal-title" id="calendarModalLabel">Reporte</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
