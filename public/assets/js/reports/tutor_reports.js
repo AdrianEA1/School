@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
         table = $("#tblReportes").DataTable({
             responsive: true,
             paging: false, // Desactiva la paginación
-            searching: false, // Desactiva el campo de búsqueda
+            //searching: false, // Desactiva el campo de búsqueda
            // ordering: false, // Desactiva la capacidad de ordenar
             info: false, // Desactiva el texto informativo ("Mostrando X a Y de Z entradas")
             lengthChange: false, // Desactiva la opción de cambiar cuántas filas se muestran
@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 emptyTable: "No hay datos disponibles",
                 zeroRecords: "No se encontraron registros coincidentes",
                 processing: "Cargando...",
+                search: "Buscar:", 
             },
             processing: true,
             serverSide: true,
