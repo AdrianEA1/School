@@ -6,6 +6,8 @@ use App\Models\Attendance;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Report;
+
 
 class TutorController extends Controller
 {
@@ -26,6 +28,14 @@ class TutorController extends Controller
         return response()->json($attendances);
     }
 
+    public function reports($student_id)
+    {
+        $reports = Report::where('student_id', $student_id)->get();
+        $student = Student::find($student_id);
+        $user = User::find($student->user_id);
+
+        return view('school.turor_reports_interface', compact('reports', 'student', 'user'));
+    }
 
 
 

@@ -26,6 +26,8 @@ Route::get('/group_details_interface/{group_id}', [GroupController::class, 'inde
 Route::get('/tutor_interface/{user_id}', [TutorController::class, 'index'])->name('tutor_interface');
 Route::get('/get-attendances/{student_id}', [TutorController::class, 'getAttendances']);
 
+Route::get('/tutor_interface/reports/{student_id}', [TutorController::class, 'reports']) ->name('tutor_interface_reports');
+
 
 //Tomar asistencia
 Route::get('/asistencia', [SiteController::class, 'interface_qr']);
