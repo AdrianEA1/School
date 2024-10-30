@@ -17,9 +17,9 @@ class TutorController extends Controller
     public function index($user_id)
     {
         $students = Student::where('user_id', $user_id)->get();
-        $user = User::find($user_id);
+        //$user = User::find($user_id);
 
-        return view('school.tutor_interface', compact('students', 'user'));
+        return view('school.tutor_interface', compact('students'));
     }
 
     public function getAttendances($student_id)
@@ -31,10 +31,10 @@ class TutorController extends Controller
     public function reports($student_id)
     {
         $reports = Report::where('student_id', $student_id)->get();
-        $student = Student::find($student_id);
-        $user = User::find($student->user_id);
+        //$student = Student::find($student_id);
+        //$user = User::find($student->user_id);
 
-        return view('school.turor_reports_interface', compact('reports', 'student', 'user'));
+        return view('school.tutor_reports_interface', compact('reports'));
     }
 
 

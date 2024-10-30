@@ -3,7 +3,7 @@
 @section('content')
     <script>
         document.querySelector('body').style.overflow = 'auto';
-        var studentId = "{{ $student->id }}";
+        var studentId = "{{ $reports[0]->student->id }}";
     </script>
     <div class="wrapper" style="overflow: visible">
 
@@ -17,8 +17,8 @@
                             &nbsp;
                             <h4 class="card-title">Escuela Secundaria Monte de las Ideas</h4>
                             <h5 class="ms-auto" data-bs-toggle="modal" data-bs-target="#addRowModal">
-                                {{ $user->nombre }} {{ $user->apellido_paterno }}
-                                {{ $user->apellido_materno }}
+                                {{ $reports[0]->student->user->nombre }} {{ $reports[0]->student->user->apellido_paterno }}
+                                {{ $reports[0]->student->user->apellido_materno }}
                             </h5>
                         </div>
                     </div>
@@ -31,8 +31,8 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-body">
-                        <h3>Alumno: {{ $student->nombre }} {{ $student->apellido_paterno }}
-                            {{ $student->apellido_materno }}</h3>
+                        <h3>Alumno: {{ $reports[0]->student->nombre }} {{ $reports[0]->student->apellido_paterno }}
+                            {{ $reports[0]->student->apellido_materno }}</h3>
                         <hr>
                         <div class="table-responsive">
                             <table id="tblReportes" class="display table table-striped table-hover">

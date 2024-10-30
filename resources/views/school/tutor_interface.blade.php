@@ -16,7 +16,7 @@
                             &nbsp;
                             <h4 class="card-title">Escuela Secundaria Monte de las Ideas</h4>
                             <h5 class="ms-auto" data-bs-toggle="modal" data-bs-target="#addRowModal">
-                                {{ $user->nombre . ' ' . $user->apellido_paterno . ' ' . $user->apellido_paterno }}
+                                {{ $students[0]->user->nombre . ' ' . $students[0]->user->apellido_paterno . ' ' . $students[0]->user->apellido_materno }}
                             </h5>
                         </div>
                     </div>

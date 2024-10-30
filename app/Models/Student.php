@@ -16,8 +16,18 @@ class Student extends Model
         return $this->belongsTo(Group::class);
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function attendances(): HasMany
     {
         return $this->HasMany(Attendance::class);
+    }
+
+    public function reports(): HasMany
+    {
+        return $this->HasMany(Report::class);
     }
 }

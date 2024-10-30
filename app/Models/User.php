@@ -18,6 +18,11 @@ class User extends Authenticatable
         return $this->hasMany(Group::class);
     }
 
+    public function students(): HasMany
+    {
+        return $this->hasMany(Student::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
