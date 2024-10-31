@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Models\Report;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
 
 class ReportController extends Controller
 {
@@ -69,6 +72,12 @@ class ReportController extends Controller
         $report->student_id = $request->student_id;
         $report->save();
 
+        $mailController = new MailController();
+        //$mailController->sendBlankEmail();
+        $mailController->sendMail($report, "Nuevo reporte de conducta");
+
+
+
         return response()->json(['message' => 'Reporte creado exitosamente'], 201);
     }
 
@@ -119,6 +128,10 @@ class ReportController extends Controller
         $report->student_id = $request->student_id;
         $report->save();
 
+        $mailController = new MailController();
+        //$mailController->sendBlankEmail();
+        $mailController->sendMail($report, "Reporte de conducta actualizado");
+
         // Retornar una respuesta
         return response()->json(['message' => 'Reporte actualizado exitosamente'], 200);
     }
@@ -135,6 +148,9 @@ class ReportController extends Controller
         $report = Report::find($request->id);
         if ($report) {
             $report->delete();
+            $mailController = new MailController();
+            //$mailController->sendBlankEmail();
+            $mailController->sendMail($report, "Reporte de conducta eliminado");
             return response()->json(['success' => 'Reporte eliminado correctamente']);
         }
         return response()->json(['error' => 'Reporte no encontrado'], 404);
