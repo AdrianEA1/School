@@ -47,11 +47,15 @@
                                         <tr>
                                             <td>{{ $student->id }}</td>
                                             <td>
-                                                <a id="astudent{{$student_id}}"  href="{{ route('tutor_interface_reports', $student->id) }}">
-                                                    {{ $student->nombre }} {{ $student->apellido_paterno }}
-                                                    {{ $student->apellido_materno }}
-                                                </a>
-                                                {{-- <input id="student{{$student->id}}" type="hidden" value={{$student->reports_count}}/> --}}
+                                                <div >
+                                                    <a id="astudent{{$student->id}}" onclick='checkReport(event, {{$student->id}})' href="{{ route('tutor_interface_reports', $student->id) }}">
+                                                        {{ $student->nombre }} {{ $student->apellido_paterno }}
+                                                        {{ $student->apellido_materno }}
+                                                    </a>
+                                                    <input id="student{{$student->id}}" type="hidden" value={{$student->reports_count}}>
+                                                </div>
+
+
                                             </td>
                                             <td>{{ $student->group->grado }}{{ $student->group->grupo }}</td>
                                             <td style="text-align: center;">
@@ -171,21 +175,28 @@
             }
         });
 
-        // const checkReport = (e, student) => {
-        //     const checkStudent = document.getElementById(student);
-        //     const checkStudent = document.getElementById(student);
-        //     e.prevenDefault();
-        //     if(checkStudent.value == '0'){
-        //         Swal.fire({
-        //             title: "¡Su asistencia se ha registrado!",
-        //             icon: "success",
-        //             showConfirmButton: false,
-        //             timer: 1300
-        //         }).then(() => scan());
-        //     }else{
+        function hola(){
 
-        //     }
-        // }
+        }
+
+        function checkReport(e, student) {
+            // console.log('hola');
+            const checkStudent = document.getElementById('student'+student);
+            const aStudent = document.getElementById('astudent'+student);
+            // e.prevenDefault();
+            // console.log(checkStudent.value)
+            // console.log(aStudent.href)
+            if(checkStudent.value == 0){
+
+                e.preventDefault();
+                Swal.fire({
+                    title: "¡Su hijo no tiene asistencias!",
+                    icon: "warning",
+                    showConfirmButton: false,
+                    timer: 1300
+                })
+            }
+        }
     </script>
 
 
@@ -205,6 +216,7 @@
                     emptyTable: "No hay datos disponibles" // Puedes personalizar el mensaje de tabla vacía
                 }
             });
+        //
         });
     </script>
 @endsection
