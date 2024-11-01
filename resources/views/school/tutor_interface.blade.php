@@ -40,17 +40,18 @@
                                         <th style="width: 10%">ASISTENCIAS</th>
                                     </tr>
                                 </thead>
-
+                                {{-- {{$students}} --}}
                                 <tbody>
 
                                     @foreach ($students as $student)
                                         <tr>
                                             <td>{{ $student->id }}</td>
                                             <td>
-                                                <a href="{{ route('tutor_interface_reports', $student->id) }}">
+                                                <a id="astudent{{$student_id}}"  href="{{ route('tutor_interface_reports', $student->id) }}">
                                                     {{ $student->nombre }} {{ $student->apellido_paterno }}
                                                     {{ $student->apellido_materno }}
                                                 </a>
+                                                {{-- <input id="student{{$student->id}}" type="hidden" value={{$student->reports_count}}/> --}}
                                             </td>
                                             <td>{{ $student->group->grado }}{{ $student->group->grupo }}</td>
                                             <td style="text-align: center;">
@@ -169,6 +170,22 @@
                     });
             }
         });
+
+        // const checkReport = (e, student) => {
+        //     const checkStudent = document.getElementById(student);
+        //     const checkStudent = document.getElementById(student);
+        //     e.prevenDefault();
+        //     if(checkStudent.value == '0'){
+        //         Swal.fire({
+        //             title: "¡Su asistencia se ha registrado!",
+        //             icon: "success",
+        //             showConfirmButton: false,
+        //             timer: 1300
+        //         }).then(() => scan());
+        //     }else{
+
+        //     }
+        // }
     </script>
 
 

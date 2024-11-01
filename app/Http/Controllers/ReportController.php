@@ -30,10 +30,13 @@ class ReportController extends Controller
 {
     // Obtener los reportes del estudiante
     $reports = Report::where('student_id', $student_id)->get();
+    //Obtener la cantidad de reportes
+    $repoCount = Report::where('student_id', $student_id)->count();
 
     // Retornar los datos en formato JSON para DataTables
     return response()->json([
-        'data' => $reports
+        'data' => $reports,
+        'reportCount' => $repoCount
     ]);
 }
     /**

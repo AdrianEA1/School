@@ -16,7 +16,8 @@ class TutorController extends Controller
      */
     public function index($user_id)
     {
-        $students = Student::where('user_id', $user_id)->get();
+        $students = Student::where('user_id', $user_id)->withCount('reports')->get();
+        // $reporCount = Report::where('student_id', $students -> id)->count();
         //$user = User::find($user_id);
 
         return view('school.tutor_interface', compact('students'));
@@ -37,6 +38,77 @@ class TutorController extends Controller
         return view('school.tutor_reports_interface', compact('reports'));
     }
 
+
+    public function makeReport(Request $request){
+        // require ('../../public/fpdf186/fpdf.php');
+        // require('../../public/fpdf186/fpdf.php');
+        require_once(public_path('fpdf186/fpdf.php'));
+
+        // $imagenUrl = $request->input('img');
+        // $student = $request->input('datos');
+
+        $student = $_POST['datos'];
+        $name = $_POST['studentName'];
+        // return $student;
+        // dd($student);
+
+        $pdf = new \FPDF();
+        $pdf -> AddPage();
+        $pdf -> SetFont('Arial', 'B', 16);
+        // HEAD
+        $pdf->Cell(80);
+        $pdf -> Cell(30, 30, ' Escuela Secundaria Monte de las Ideas ', 0, 1,'C');
+        $pdf -> Line(20, 50, 190, 50);
+
+        $pdf->Cell(50);
+        $pdf -> Cell(30, 50, 'Fecha del reporte: ', 0, 0);
+        $pdf -> SetFont('Arial', '', 14);
+        $pdf->Cell(30);
+        $pdf -> Cell(30, 50, $student['fecha'], 0, 1);
+
+        $pdf->Cell(50);
+        $pdf -> SetFont('Arial', 'B', 16);
+        $pdf -> Cell(30, 0, 'Nombre del alumno: ', 0, 0);
+        $pdf -> SetFont('Arial', '', 14);
+        $pdf->Cell(30);
+        $pdf -> Cell(30, 0, $name, 0, 1);
+
+        $pdf->Cell(35);
+        $pdf -> SetFont('Arial', 'B', 16);
+        $pdf -> Cell(30, 50, 'Maestro quien hizo el reporte: ', 0, 0);
+        $pdf -> SetFont('Arial', '', 14);
+        $pdf->Cell(60);
+        $pdf -> Cell(30, 50, $student['maestro'], 0, 1);
+
+        $pdf->Cell(55);
+        $pdf -> SetFont('Arial', 'B', 16);
+        $pdf -> Cell(30, 0, 'Tipo de reporte: ', 0, 0);
+        $pdf -> SetFont('Arial', '', 14);
+        $pdf->Cell(30);
+        $pdf -> Cell(30, 0, $student['tipo'], 0, 1);
+
+        $pdf->Cell(50);
+        $pdf -> SetFont('Arial', 'B', 16);
+        $pdf -> Cell(30, 50, 'Motivo del reporte: ', 0, 0);
+        $pdf -> SetFont('Arial', '', 14);
+        $pdf->Cell(25);
+        $pdf -> Cell(30, 50, $student['motivo'], 0, 1);
+        // $pdf -> Image($imagenUrl, 10, 20, 40);
+        // $pdf -> Output();
+
+        // return $pdf;
+        // var_dump($pdf);
+        // return true;
+
+        // Captura la salida del PDF en un buffer
+        $output = $pdf->Output('S');
+
+        // Retorna el contenido del PDF como una respuesta en binario
+        return response($output)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'inline; filename="documento.pdf"');
+
+    }
 
 
     /**

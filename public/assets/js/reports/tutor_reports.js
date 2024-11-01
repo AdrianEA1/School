@@ -1,3 +1,14 @@
+// import { jsPDF } from "jspdf";
+
+// import { default as jsPDF } from "jspdf";
+
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 document.addEventListener("DOMContentLoaded", function () {
     var table; // Definición de la variable `table` en el ámbito más amplio
     const editButtons = document.querySelectorAll(".edit-button");
@@ -14,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 emptyTable: "No hay datos disponibles",
                 zeroRecords: "No se encontraron registros coincidentes",
                 processing: "Cargando...",
-                search: "Buscar:", 
+                search: "Buscar:",
             },
             processing: true,
             serverSide: true,
@@ -50,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     render: function (data, type, row) {
                         return `
                         <div class="form-button-action">
-                            <button type="button"  data-bs-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
+                            <button id="btnMakePDF" onclick="generateReportPDF()" type="button"  data-bs-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" >
                                 <i class="fa  fas fa-file-pdf" style="color: red;"></i>
                             </button>
                         </div>`;
@@ -65,3 +76,42 @@ document.addEventListener("DOMContentLoaded", function () {
         table.responsive.recalc(); // Recalcular la responsividad de la tabla
     });
 });
+
+
+const generateReportPDF = () => {
+        // const img = $('#imgLogo').attr('src');
+        // console.log(img);
+        var name = $('#studentName').text();
+        // console.log(name);
+        var studentName = name.replace("Alumno: ", "")
+        $.ajax({
+            url: "/report/list/" + studentId,
+            type: "GET",
+            success: function(student){
+                console.log(student);
+;                $.ajax({
+                    url: "/make_report",
+                    type: "post",
+                    data: {datos: student.data[0], studentName: studentName },
+                    xhrFields: {
+                        responseType: 'blob'
+                    },
+                    success: function(res){
+                        // console.log(res);
+                        const url = URL.createObjectURL(res);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.target = '_blank';
+                        a.click();
+                        URL.revokeObjectURL(url);
+                        // console.log(res);
+                    },
+                    error: function(e){
+                        console.log(e);
+                    }
+                })
+            }
+        })
+
+
+}

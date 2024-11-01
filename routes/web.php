@@ -27,6 +27,8 @@ Route::get('/tutor_interface/{user_id}', [TutorController::class, 'index'])->nam
 Route::get('/get-attendances/{student_id}', [TutorController::class, 'getAttendances']);
 
 Route::get('/tutor_interface/reports/{student_id}', [TutorController::class, 'reports']) ->name('tutor_interface_reports');
+Route::post('make_report', action: [TutorController::class, 'makeReport']) ->name('make_report');
+// Route::resource('make_report', TutorController::class);
 
 
 //Tomar asistencia

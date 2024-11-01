@@ -13,7 +13,7 @@
 
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <img height="60px" src="{{ asset('assets/img/beePresent.png') }}">
+                            <img id="imgLogo" height="60px" src="{{ asset('assets/img/beePresent.png') }}">
                             &nbsp;
                             <h4 class="card-title">Escuela Secundaria Monte de las Ideas</h4>
                             <h5 class="ms-auto" data-bs-toggle="modal" data-bs-target="#addRowModal">
@@ -31,8 +31,7 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-body">
-                        <h3>Alumno: {{ $reports[0]->student->nombre }} {{ $reports[0]->student->apellido_paterno }}
-                            {{ $reports[0]->student->apellido_materno }}</h3>
+                        <h3 id="studentName">Alumno: {{ $reports[0]->student->nombre }} {{ $reports[0]->student->apellido_paterno }} {{ $reports[0]->student->apellido_materno }}</h3>
                         <hr>
                         <div class="table-responsive">
                             <table id="tblReportes" class="display table table-striped table-hover">
