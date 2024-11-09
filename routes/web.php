@@ -21,6 +21,9 @@ Route::get('/prefect_interface/{user_id}', [PrefectController::class, 'index'])-
 //Interfaz detalle prefecto
 Route::get('/group_details_interface/{group_id}', [GroupController::class, 'index'])->name('group_details_interface');
 
+//Interfaz estadisticas de grupo
+Route::get('/group_statistics_interface/{group_id}', [GroupController::class, 'statistics'])->name('group_statistics_interface');
+
 
 //Interfaz del tutor
 Route::get('/tutor_interface/{user_id}', [TutorController::class, 'index'])->name('tutor_interface');

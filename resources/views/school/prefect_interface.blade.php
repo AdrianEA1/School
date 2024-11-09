@@ -39,6 +39,7 @@
                                     <th>GRADO</th>
                                     <th>GRUPO</th>
                                     <th style="width: 10%">DETALLE</th>
+                                    <th style="width: 10%">Estadísticas</th>
                                 </tr>
                             </thead>
 
@@ -55,6 +56,16 @@
                                                     data-bs-toggle="tooltip" class="btn btn-link btn-primary btn-lg"
                                                     data-original-title="Edit Task">
                                                     <i class="fa fa-edit"></i>
+                                                </a>
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <div class="form-button-action">
+                                                <a href="{{ route('group_statistics_interface', $group->id) }}"
+                                                   data-bs-toggle="tooltip" class="btn btn-link btn-primary btn-lg"
+                                                   data-original-title="Edit Task">
+                                                    <i class="fa fa-chart-bar"></i>
                                                 </a>
                                             </div>
 

@@ -16,6 +16,12 @@ class GroupController extends Controller
         return view('school.group_details_interface', compact('group'));
     }
 
+    public function statistics($group_id)
+    {
+        $group = Group::find($group_id);
+        return view('school.group_statistics_interface', compact('group'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
