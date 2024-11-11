@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\Models\Attendance;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GroupController extends Controller
 {
@@ -20,6 +22,41 @@ class GroupController extends Controller
     {
         $group = Group::find($group_id);
         return view('school.group_statistics_interface', compact('group'));
+    }
+
+    public function getAttendancesByGroup(Request $request){
+        $startDate = $request['startDate'];
+        $endDate = $request['endDate'];
+        // $attendances = Group::where('id', $request['groupId'])
+        // ->with(['students.attendances' => function ($query) use ($startDate, $endDate) {
+        //     $query->whereBetween('fecha', [$startDate, $endDate]);
+        // }])
+        // ->get();
+
+        // $attendancesPerMonth = Group::where('id', $request['groupId'])
+        // ->with(['students.attendances' => function ($query) use ($startDate, $endDate) {
+        //     $query->whereBetween('fecha', [$startDate, $endDate])
+        //           ->select(DB::raw('YEAR(fecha) as year'), DB::raw('MONTH(fecha) as month'), DB::raw('COUNT(*) as total'))
+        //           ->groupBy('year', 'month');
+        // }])
+        // ->get();
+
+        $asistenciasPorMes = Attendance::join('students', 'attendances.student_id', '=', 'students.id')
+        ->join('groups', 'students.group_id', '=', 'groups.id')
+        ->where('groups.id', $request['groupId'])
+        ->whereBetween('attendances.fecha', [$startDate, $endDate])
+        // ->whereBetween('attendances.fecha', ['2023-11-04', '2024-07-06'])
+        ->select(
+            DB::raw('YEAR(attendances.fecha) as year'),
+            DB::raw('MONTHNAME(attendances.fecha) as month'),
+            DB::raw('COUNT(attendances.id) as total')
+        )
+        ->groupBy('year', 'month')
+        ->orderBy('year')
+        ->orderBy('month')
+        ->get();
+
+    return $asistenciasPorMes;
     }
 
     /**

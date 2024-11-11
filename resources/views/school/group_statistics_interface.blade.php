@@ -3,6 +3,7 @@
 @section('content')
     <script>
         document.querySelector('body').style.overflow = 'auto';
+        var groupId = "{{ $group->id }}";
     </script>
     <div class="wrapper" style="overflow: visible">
 
@@ -17,8 +18,8 @@
                             <h4 class="card-title">Escuela Secundaria Monte de las Ideas</h4>
                             <h5 class="ms-auto" data-bs-toggle="modal" data-bs-target="#addRowModal">
 
-                                {{ $group->user->nombre }} {{ $group->user->apellido_paterno }}
-                                {{ $group->user->apellido_materno }}
+                                {{-- {{ $group->user->nombre }} {{ $group->user->apellido_paterno }}
+                                {{ $group->user->apellido_materno }} --}}
 
                             </h5>
                         </div>
@@ -38,18 +39,18 @@
                             <h3 style="display: inline-block">Grupo: {{ $group->grado }}{{ $group->grupo }}</h3>
                             <div style="width: auto" class="form-group form-group-default ">
                                 <label>Fecha inicial</label>
-                                <input type="date" class="form-control"/>
+                                <input id="start-date" type="date" class="form-control"/>
                             </div>
                             <div style="width: auto" class="form-group form-group-default ">
                                 <label>Fecha final</label>
-                                <input type="date" class="form-control"/>
+                                <input id="end-date" type="date" class="form-control"/>
                             </div>
                         </div>
 
                         <hr>
 
                         <div style="height: 400px; align-content: center; text-align: center">
-                            [chart]
+                            <canvas id="chart-statistics" width="400" height="200"></canvas>
                         </div>
 
                         <!--
@@ -101,4 +102,7 @@
     <script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
 
     <script src="{{ asset('assets/js/data_tables_groups.js') }}"></script>
+
+    <script src="{{asset('assets/js/plugin/chart.js/chart.min.js')}}"></script>
+    <script src="{{asset('assets/js/chart_statistics.js')}}"></script>
 @endsection

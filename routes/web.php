@@ -23,6 +23,7 @@ Route::get('/group_details_interface/{group_id}', [GroupController::class, 'inde
 
 //Interfaz estadisticas de grupo
 Route::get('/group_statistics_interface/{group_id}', [GroupController::class, 'statistics'])->name('group_statistics_interface');
+Route::get('/group_statistics_interface/get_attendances/{group_id}', [GroupController::class, 'getAttendancesByGroup'])->name('group_statistics');
 
 
 //Interfaz del tutor
