@@ -72,7 +72,7 @@
                                             </td>
                                             <td>
                                                 <div class="form-button-action">
-                                                    <a href="{{ route('student_statistics_interface') }}"
+                                                    <a href="{{ route('student_statistics_interface', $student->id) }}"
                                                        data-bs-toggle="tooltip" class="btn btn-link btn-primary btn-lg"
                                                        data-original-title="Edit Task">
                                                         <i class="fa fa-chart-bar"></i>

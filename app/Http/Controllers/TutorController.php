@@ -26,8 +26,8 @@ class TutorController extends Controller
 
     public function statistics($student_id)
     {
-        $attendances = Attendance::where('student_id', $student_id)->get();
-        return view('school.student_statistics_interface', compact('attendances'));
+        $student = Student::find($student_id); 
+        return view('school.student_statistics_interface', compact('student'));
     }
 
     public function getAttendances($student_id)
@@ -47,8 +47,8 @@ class TutorController extends Controller
 
     public function statisticsPrueba($student_id)
     {
-        $attendances = Attendance::where('student_id', $student_id)->get();
-        return view('school.prueba', compact('attendances'));
+        $student = Student::where('id', $student_id)->get();
+        return view('school.prueba', compact('student'));
     }
 
 

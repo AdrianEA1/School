@@ -109,21 +109,13 @@ function fillAttendanceTable(asistenciasPorMes, startDate, endDate) {
         "July", "August", "September", "October", "November", "December"
     ];
 
-    // Parsear las fechas de inicio y fin
-    const startDateObj = new Date(startDate);
-    const startMonth = startDateObj.getMonth();
-    const startYear = startDateObj.getFullYear();
-    const startDay = startDateObj.getDate();
+    const [startYear, startMonth, startDay] = startDate.split("-").map(Number);
+    const [endYear, endMonth, endDay] = endDate.split("-").map(Number);
 
-    const endDateObj = new Date(endDate);
-    const endMonth = endDateObj.getMonth();
-    const endYear = endDateObj.getFullYear();
-    const endDay = endDateObj.getDate();
-
-    // Iterar desde el mes de inicio hasta el mes de corte
+    // Iterar desde inicio hasta el corte
     for (let year = startYear; year <= endYear; year++) {
-        const start = year === startYear ? startMonth : 0;
-        const end = year === endYear ? endMonth : 11;
+        const start = year === startYear ? startMonth - 1 : 0;
+        const end = year === endYear ? endMonth - 1 : 11;
 
         for (let monthIndex = start; monthIndex <= end; monthIndex++) {
             const month = months[monthIndex];
@@ -131,67 +123,92 @@ function fillAttendanceTable(asistenciasPorMes, startDate, endDate) {
             const attendance = asistenciasPorMes.find(
                 (a) => a.year === year && a.month === month
             );
-
             const totalAssistance = attendance ? attendance.total : 0;
 
+            // Calcular el número de días hábiles en el mes completo
             let totalDaysInMonth = getWeekdaysInMonth(year, monthIndex + 1);
-
-            if (monthIndex === endMonth && endDay < totalDaysInMonth) {
-                totalDaysInMonth = endDay;
+            // Ajustar los días si es el mes de inicio parcial
+            if (year === startYear && monthIndex + 1 === startMonth) {
+                totalDaysInMonth = getWeekdaysUntilDate(year, monthIndex + 1, startDay);
             }
-
-            if (monthIndex === startMonth && startDay > 1) {
-                totalDaysInMonth -= startDay - 1;
+            // Ajustar los días si es el mes de fin parcial
+            if (year === endYear && monthIndex + 1 === endMonth) {
+                totalDaysInMonth = getWeekdaysUntilEnd(year, monthIndex + 1, endDay);
+                flag = true;
             }
+            totalDaysInMonth = Math.max(totalDaysInMonth, 0);
 
             const row = document.createElement("tr");
-
             // Crear la celda para el año
             const yearCell = document.createElement("td");
             yearCell.textContent = year;
             yearCell.style.textAlign = "center";
             row.appendChild(yearCell);
-
             // Crear la celda para el mes
             const monthCell = document.createElement("td");
             monthCell.textContent = month;
             monthCell.style.textAlign = "center";
             row.appendChild(monthCell);
-
             // Crear la celda para el total de asistencias
             const totalCell = document.createElement("td");
             totalCell.textContent = totalAssistance;
             totalCell.style.textAlign = "center";
             totalCell.style.color = "green";
             row.appendChild(totalCell);
-
             // Calcular las inasistencias
             const absences = totalDaysInMonth - totalAssistance;
-
             // Crear la celda para las inasistencias
             const absencesCell = document.createElement("td");
-            absencesCell.textContent = absences;
+            absencesCell.textContent = Math.max(absences, 0);
             absencesCell.style.textAlign = "center";
             absencesCell.style.color = "red";
             row.appendChild(absencesCell);
 
-            // Agregar la fila al cuerpo de la tabla
             tableBody.appendChild(row);
         }
     }
 }
 
+// Función para calcular los días hábiles en un mes completo
 function getWeekdaysInMonth(year, month) {
-    const firstDay = new Date(year, month - 1, 1);
-    const lastDay = new Date(year, month, 0);
+    const date = new Date(year, month - 1, 1);
     let weekdays = 0;
+    while (date.getMonth() === month - 1) {
+        const dayOfWeek = date.getDay();
+        if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+            weekdays++;
+        }
+        date.setDate(date.getDate() + 1);
+    }
+    return weekdays;
+}
 
-    for (let day = firstDay; day <= lastDay; day.setDate(day.getDate() + 1)) {
-        const dayOfWeek = day.getDay();
-        if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+// Calcular los días hábiles desde un día específico hasta el final del mes
+function getWeekdaysUntilDate(year, month, day) {
+    const date = new Date(year, month - 1, 1);
+    let weekdays = 0;
+    for (let d = 1; d <= day; d++) {
+        date.setDate(d);
+        const dayOfWeek = date.getDay();
+        if (dayOfWeek !== 0 && dayOfWeek !== 6) {
             weekdays++;
         }
     }
-
     return weekdays;
 }
+
+// Calcular los días hábiles desde el inicio del mes hasta un día específico
+function getWeekdaysUntilEnd(year, month, endDay) {
+    const date = new Date(year, month - 1, 1);
+    let weekdays = 0;
+
+    while (date.getMonth() === month - 1 && date.getDate() <= endDay) {
+        const dayOfWeek = date.getDay();
+        if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+            weekdays++;
+        }
+        date.setDate(date.getDate() + 1);
+    }
+    return weekdays;
+}
+

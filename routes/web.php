@@ -59,6 +59,6 @@ Route::post(uri: '/report/store', action: [ReportController::class, 'store'])->n
 Route::post(uri: '/report/delete', action: [ReportController::class, 'delete'])->name('report.delete');
 
 //Interfaz estadisticas de alumno
-Route::get('/prueba/{student_id}', [TutorController::class, 'statistics'])->name('student_statistics_interface');
-Route::get('/pruebachart/{student_id}', [TutorController::class, 'getAttendancesChart'])->name('student_statistics_chart');
+Route::get('/prueba/{student_id}', [TutorController::class, 'statistics'])->name('student_statistics_interfacePrueba');
+Route::get('/pruebachart/{student_id}', [TutorController::class, 'getAttendancesChart'])->name('student_statistics_chartPrueba');
 
