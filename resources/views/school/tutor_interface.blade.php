@@ -38,6 +38,7 @@
                                         <th style="width: 60%">NOMBRE</th>
                                         <th style="width: 40%">GRUPO</th>
                                         <th style="width: 10%">ASISTENCIAS</th>
+                                        <th style="width: 10%">ESTADÍSTICAS</th>
                                     </tr>
                                 </thead>
                                 {{-- {{$students}} --}}
@@ -65,6 +66,16 @@
                                                         class="btn btn-link btn-primary btn-lg"
                                                         data-original-title="View Calendar">
                                                         <i class="fa fa-calendar"></i>
+                                                    </a>
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div class="form-button-action">
+                                                    <a href="{{ route('student_statistics_interface') }}"
+                                                       data-bs-toggle="tooltip" class="btn btn-link btn-primary btn-lg"
+                                                       data-original-title="Edit Task">
+                                                        <i class="fa fa-chart-bar"></i>
                                                     </a>
                                                 </div>
 
