@@ -30,6 +30,10 @@ Route::get('/group_statistics_interface/get_attendances/{group_id}', [GroupContr
 Route::get('/tutor_interface/{user_id}', [TutorController::class, 'index'])->name('tutor_interface');
 Route::get('/get-attendances/{student_id}', [TutorController::class, 'getAttendances']);
 
+//Interfaz estadisticas de Alumno
+Route::get('/student_statistics_interface', [TutorController::class, 'statistics'])->name('student_statistics_interface');
+
+
 Route::get('/tutor_interface/reports/{student_id}', [TutorController::class, 'reports']) ->name('tutor_interface_reports');
 Route::post('make_report', action: [TutorController::class, 'makeReport']) ->name('make_report');
 // Route::resource('make_report', TutorController::class);

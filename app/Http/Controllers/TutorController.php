@@ -24,6 +24,12 @@ class TutorController extends Controller
         return view('school.tutor_interface', compact('students'));
     }
 
+    public function statistics()
+    {
+
+        return view('school.student_statistics_interface');
+    }
+
     public function getAttendances($student_id)
     {
         $attendances = Attendance::where('student_id', $student_id)->get();
