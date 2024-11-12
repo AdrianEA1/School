@@ -7,6 +7,7 @@ use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Report;
+use Illuminate\Support\Facades\DB;
 
 
 class TutorController extends Controller
@@ -38,6 +39,33 @@ class TutorController extends Controller
         return view('school.tutor_reports_interface', compact('reports'));
     }
 
+    public function statistics($student_id)
+    {
+        $attendances = Attendance::where('student_id', $student_id)->get();
+        return view('school.prueba', compact('attendances'));
+    }
+
+
+    public function getAttendancesChart(Request $request){
+        $startDate = $request['startDate'];
+        $endDate = $request['endDate'];
+
+        $asistenciasPorMes = Attendance::query()
+        ->join('students', 'attendances.student_id', '=', 'students.id')
+        ->where('students.id', $request['student_id'])
+        ->whereBetween('attendances.fecha', [$startDate, $endDate])
+        ->select(
+            DB::raw('YEAR(attendances.fecha) as year'),
+            DB::raw('MONTHNAME(attendances.fecha) as month'),
+            DB::raw('COUNT(attendances.id) as total')
+        )
+        ->groupBy('year', 'month')
+        ->orderBy('year')
+        ->orderBy('month')
+        ->get();
+
+    return $asistenciasPorMes;
+    }
 
     public function makeReport(Request $request){
         // require ('../../public/fpdf186/fpdf.php');

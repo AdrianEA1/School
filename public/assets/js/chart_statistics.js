@@ -2,6 +2,8 @@ const chartStatistics = document.getElementById("chart-statistics").getContext('
 var startDate
 var endDate
 var charAttendances
+const startDateInput = document.getElementById("start-date");
+const endDateInput = document.getElementById("end-date");
 // Obtener la fecha actual
 const today = new Date()
 const year = today.getFullYear();
@@ -19,6 +21,9 @@ const fechForm = `${yearPresent}-${lastMonth}-${dayPresent}`;
 
 //Generar la gráfica sin espificar los tiempos
 generateChart(fechForm, fechaFormateada)
+
+endDateInput.value = fechaFormateada;
+startDateInput.value = fechForm;
 
 $("#start-date").change(function() {
     startDate = $('#start-date').val()
