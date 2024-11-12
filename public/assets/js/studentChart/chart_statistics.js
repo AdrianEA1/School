@@ -7,15 +7,12 @@ var charAttendances;
 const startDateInput = document.getElementById("start-date");
 const endDateInput = document.getElementById("end-date");
 
-
-
 // Obtener la fecha actual
 const today = new Date();
 const year = today.getFullYear();
 const month = String(today.getMonth() + 1).padStart(2, "0");
 const day = String(today.getDate()).padStart(2, "0");
 const fechaFormateada = `${year}-${month}-${day}`;
-
 
 today.setMonth(today.getMonth() - 10);
 const yearPresent = today.getFullYear();
@@ -59,14 +56,14 @@ function generateChart(start, end) {
         },
 
         success: function (response) {
-            if (typeof end == 'undefined'){
+            if (typeof end == "undefined") {
                 end = endDate;
                 start = startDate;
             }
             fillAttendanceTable(response, start, end);
 
-            const labels = response.map(item => `${item.year}-${item.month}`);
-            const counts = response.map(item => item.total)
+            const labels = response.map((item) => `${item.year}-${item.month}`);
+            const counts = response.map((item) => item.total);
 
             charAttendances = new Chart(chartStatistics, {
                 type: "bar",
@@ -99,12 +96,12 @@ function generateChart(start, end) {
             console.log(error);
         },
     });
-
 }
 
-
 function fillAttendanceTable(asistenciasPorMes, startDate, endDate) {
-    const tableBody = document.getElementById("attendanceTable").querySelector("tbody");
+    const tableBody = document
+        .getElementById("attendanceTable")
+        .querySelector("tbody");
     tableBody.innerHTML = "";
 
     const months = [
@@ -125,54 +122,47 @@ function fillAttendanceTable(asistenciasPorMes, startDate, endDate) {
 
     // Iterar desde el mes de inicio hasta el mes de corte
     for (let year = startYear; year <= endYear; year++) {
-
-        const start = (year === startYear) ? startMonth : 0;
-        const end = (year === endYear) ? endMonth : 11;
+        const start = year === startYear ? startMonth : 0;
+        const end = year === endYear ? endMonth : 11;
 
         for (let monthIndex = start; monthIndex <= end; monthIndex++) {
             const month = months[monthIndex];
 
-            // Buscar la asistencia para este mes y año
-            const attendance = asistenciasPorMes.find(a => a.year === year && a.month === month);
+            const attendance = asistenciasPorMes.find(
+                (a) => a.year === year && a.month === month
+            );
 
-            // Si no existe un registro de asistencia, asignar 0
             const totalAssistance = attendance ? attendance.total : 0;
 
-            // Obtener los días laborables del mes
-            let totalDaysInMonth = getWeekdaysInMonth(year, monthIndex + 1); // +1 porque los meses empiezan desde 0
+            let totalDaysInMonth = getWeekdaysInMonth(year, monthIndex + 1);
 
-            // Verificar si estamos en el mes de `endDate` y si el día de `endDate` es menor que el número de días laborales
             if (monthIndex === endMonth && endDay < totalDaysInMonth) {
-                // Si estamos en el mes de corte y el día de corte es menor que el número de días laborables
-                totalDaysInMonth = endDay; // Limitar a los días hasta `endDate`
+                totalDaysInMonth = endDay;
             }
 
-            // Verificar si estamos en el mes de `startDate` y si el día de `startDate` es mayor que 1
             if (monthIndex === startMonth && startDay > 1) {
-                // Limitar los días hasta el día de `startDate`
-                totalDaysInMonth -= (startDay - 1);
+                totalDaysInMonth -= startDay - 1;
             }
 
-            // Crear la fila de la tabla
             const row = document.createElement("tr");
 
             // Crear la celda para el año
             const yearCell = document.createElement("td");
             yearCell.textContent = year;
-            yearCell.style.textAlign = 'center';
+            yearCell.style.textAlign = "center";
             row.appendChild(yearCell);
 
             // Crear la celda para el mes
             const monthCell = document.createElement("td");
             monthCell.textContent = month;
-            monthCell.style.textAlign = 'center';
+            monthCell.style.textAlign = "center";
             row.appendChild(monthCell);
 
             // Crear la celda para el total de asistencias
             const totalCell = document.createElement("td");
             totalCell.textContent = totalAssistance;
-            totalCell.style.textAlign = 'center';
-            totalCell.style.color = 'green';
+            totalCell.style.textAlign = "center";
+            totalCell.style.color = "green";
             row.appendChild(totalCell);
 
             // Calcular las inasistencias
@@ -181,8 +171,8 @@ function fillAttendanceTable(asistenciasPorMes, startDate, endDate) {
             // Crear la celda para las inasistencias
             const absencesCell = document.createElement("td");
             absencesCell.textContent = absences;
-            absencesCell.style.textAlign = 'center';
-            absencesCell.style.color = 'red';
+            absencesCell.style.textAlign = "center";
+            absencesCell.style.color = "red";
             row.appendChild(absencesCell);
 
             // Agregar la fila al cuerpo de la tabla
@@ -190,8 +180,6 @@ function fillAttendanceTable(asistenciasPorMes, startDate, endDate) {
         }
     }
 }
-
-
 
 function getWeekdaysInMonth(year, month) {
     const firstDay = new Date(year, month - 1, 1);

@@ -24,10 +24,10 @@ class TutorController extends Controller
         return view('school.tutor_interface', compact('students'));
     }
 
-    public function statistics()
+    public function statistics($student_id)
     {
-
-        return view('school.student_statistics_interface');
+        $attendances = Attendance::where('student_id', $student_id)->get();
+        return view('school.student_statistics_interface', compact('attendances'));
     }
 
     public function getAttendances($student_id)
@@ -45,7 +45,7 @@ class TutorController extends Controller
         return view('school.tutor_reports_interface', compact('reports'));
     }
 
-    public function statistics($student_id)
+    public function statisticsPrueba($student_id)
     {
         $attendances = Attendance::where('student_id', $student_id)->get();
         return view('school.prueba', compact('attendances'));

@@ -31,8 +31,8 @@ Route::get('/tutor_interface/{user_id}', [TutorController::class, 'index'])->nam
 Route::get('/get-attendances/{student_id}', [TutorController::class, 'getAttendances']);
 
 //Interfaz estadisticas de Alumno
-Route::get('/student_statistics_interface', [TutorController::class, 'statistics'])->name('student_statistics_interface');
-
+Route::get('/student_statistics_interface/{student_id}', [TutorController::class, 'statistics'])->name('student_statistics_interface');
+Route::get('/pruebachart/{student_id}', [TutorController::class, 'getAttendancesChart'])->name('student_statistics_chart');
 
 Route::get('/tutor_interface/reports/{student_id}', [TutorController::class, 'reports']) ->name('tutor_interface_reports');
 Route::post('make_report', action: [TutorController::class, 'makeReport']) ->name('make_report');
